@@ -12,6 +12,19 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages', // if advanced application, set @frontend/messages
+                    'sourceLanguage' => 'es_ES',
+                    'fileMap' => [
+                        //'main' => 'main.php',
+                    ],
+                ],
+            ],
+            
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'vHnXNn6vTAksYgmeTuTzt2ImMeb5YeBB',
@@ -43,14 +56,21 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
             'rules' => [
-            ],
+                [   'class' => 'yii\rest\UrlRule',
+                    'controller' => 'persona', 
+                    'extraPatterns' => [
+                        'GET buscar-por-documento/{nro_documento}' => 'buscar-por-documento',
+                        'OPTIONS buscar-por-documento/{nro_documento}' => 'buscar-por-documento',
+                    ],                      
+                    'tokens' => [ '{id}' => '<id:\\w+>', '{nro_documento}'=>'<nro_documento:\\w+>' ],
+                ]
+            ]
         ],
-        */
     ],
     'params' => $params,
 ];
@@ -68,7 +88,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 }
 
