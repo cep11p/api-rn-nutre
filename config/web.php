@@ -28,6 +28,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'vHnXNn6vTAksYgmeTuTzt2ImMeb5YeBB',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -56,6 +59,9 @@ $config = [
             ],
         ],
         'db' => $db,
+        'registral'=> [
+            'class' => $params['servicioRegistral'],//'app\components\ServicioRegistral'
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
