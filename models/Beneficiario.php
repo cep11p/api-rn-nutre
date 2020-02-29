@@ -31,4 +31,12 @@ class Beneficiario extends BaseBeneficiario
             ]
         );
     }
+    
+    public function setAttributes($values, $safeOnly = true) {
+        parent::setAttributes($values, $safeOnly);
+        
+        $persona = new PersonaForm();
+        $persona->setAttributesAndSave($values);
+        $this->personaid = $persona->id;
+    }
 }

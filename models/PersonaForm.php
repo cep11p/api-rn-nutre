@@ -125,6 +125,11 @@ class PersonaForm extends Model
         
     }
     
+    /**
+     * Se registran datos personales, inclusive datos de lugar (direccion y localidad) creando un nucleo familiar predeterminado en un hogar fisico
+     * @param array $param
+     * @throws Exception
+     */
     public function setAttributesAndSave($param = array()) {
         
         
