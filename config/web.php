@@ -87,7 +87,12 @@ $config = [
     ],
     'params' => $params,
     'modules' => [
-        'audit' => 'bedezign\yii2\audit\Audit',
+        "audit"=>[
+            "class"=>"bedezign\yii2\audit\Audit",
+            'accessIps'=>null,
+            'accessUsers'=>null,
+            'accessRoles'=>null
+        ],
         'user' => [
             'class' => 'dektrium\user\Module',
             'enableConfirmation'=>false,
