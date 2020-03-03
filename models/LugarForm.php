@@ -28,7 +28,6 @@ class LugarForm extends Model
             [['calle', 'altura', 'localidadid'], 'required'],
             [['localidadid','id'], 'integer'],
             [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto', 'escalera'], 'string', 'max' => 200],
-            ['localidadid','existeLocalidadEnSistemaLugar'],
         ];
     }
     
@@ -48,18 +47,6 @@ class LugarForm extends Model
         } 
         
         return $resultado;
-    }
-    
-    /**
-     * Vamos a ver si localidadid tiene integridad con el sistema Lugar, 
-     * Es decir que el sistema lugar debe tener una tabla Localidad
-     */
-    public function existeLocalidadEnSistemaLugar() {
-        $response = \Yii::$app->lugar->buscarLocalidadPorId($this->localidadid);    
-        
-        if(isset($response['success']) && $response['success']!=true){
-            $this->addError('id', 'La localidad con el id '.$this->id.' no existe!');
-        }
     }
     
     /**

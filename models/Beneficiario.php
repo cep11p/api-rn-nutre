@@ -32,9 +32,12 @@ class Beneficiario extends BaseBeneficiario
         );
     }
     
+    /**
+     * Se reciben los parametros para registrar una persona con interoperabilidad al sistema registral, con el fin de obtener una personaid
+     * @param array $values
+     * @param type $safeOnly
+     */
     public function setAttributes($values, $safeOnly = true) {
-        parent::setAttributes($values, $safeOnly);
-        
         $persona = new PersonaForm();
         $persona->setAttributesAndSave($values);
         $this->personaid = $persona->id;

@@ -36,10 +36,8 @@ class ServicioRegistral extends Component implements IServicioRegistral
             $headers = [
                 'Authorization' => 'Bearer ' .\Yii::$app->params['JWT_REGISTRAL'], 
            ];
-            
             $response = $client->request('POST', \Yii::$app->params['URL_REGISTRAL'].'/api/personas', ['json' => $data,'headers' => $headers]);
             $respuesta = json_decode($response->getBody()->getContents(), true);
-             
             \Yii::error($respuesta);
             return $respuesta['data']['id'];
         } catch (\GuzzleHttp\Exception\BadResponseException $e) {

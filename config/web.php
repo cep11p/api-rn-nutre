@@ -71,6 +71,10 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 [   'class' => 'yii\rest\UrlRule',
+                    'controller' => 'beneficiario'
+                ],
+                /***** Registral ********/
+                [   'class' => 'yii\rest\UrlRule',
                     'controller' => 'persona', 
                     'extraPatterns' => [
                         'GET buscar-por-documento/{nro_documento}' => 'buscar-por-documento',

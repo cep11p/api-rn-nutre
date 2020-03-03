@@ -4,7 +4,7 @@ return [
     'adminEmail' => 'admin@example.com',
     'senderEmail' => 'noreply@example.com',
     'senderName' => 'Example.com mailer',
-    'JWT_REGISTRAL' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODI5MTA5NjgsInVzdWFyaW8iOiJybm51dHJlIiwidWlkIjo0fQ.LOtHMcSS0_s3ezTWlZBMYee6pgNwr3VgL7_UY_4M_cQ',
+    'JWT_REGISTRAL' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoicm5udXRyZSIsInVpZCI6NH0.MwtfeS1TXnZoKs6HILEDSi398U416nx0Aixw6GnhO5Y',
     'servicioRegistral'=> getenv('SERVICIO_REGISTRAL')?getenv('SERVICIO_REGISTRAL'):'app\components\DummyServicioRegistral',
     'URL_REGISTRAL' => 'http://registral',
     /***interoperabilidad con Lugar*****/

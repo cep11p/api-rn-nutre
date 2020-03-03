@@ -40,7 +40,7 @@ class PersonaForm extends Model
             [['nombre', 'apellido', 'nro_documento', 'telefono', 'celular'], 'string', 'max' => 45],
             [['cuil'], 'string', 'max' => 20],
             [['email','red_social'], 'string', 'max' => 200],            
-            [['email'], 'email'],
+            [['email'], 'email','skipOnEmpty' => true],
             [['fecha_nacimiento'], 'date', 'format' => 'php:Y-m-d'],
             ['nro_documento', 'match', 'pattern' => "/^[0-9]+$/"]
         ];
@@ -72,13 +72,13 @@ class PersonaForm extends Model
      * @param bool $safeOnly
      * @throws Exception
      */
-    public function setAttributes($param) {
+    public function setAttributes($values, $safeOnly = true) {
         /*** Persona ***/
-        parent::setAttributes($param);
+        parent::setAttributes($values);
         
         /*Fecha Nacimiento*/
-        if(isset($param['fecha_nacimiento']) && !empty($param['fecha_nacimiento'])){
-            $this->fecha_nacimiento = Yii::$app->formatter->asDate($param['fecha_nacimiento'], 'php:Y-m-d');
+        if(isset($values['fecha_nacimiento']) && !empty($values['fecha_nacimiento'])){
+            $this->fecha_nacimiento = Yii::$app->formatter->asDate($values['fecha_nacimiento'], 'php:Y-m-d');
         }  
         
     }
@@ -126,19 +126,17 @@ class PersonaForm extends Model
     }
     
     /**
-     * Se registran datos personales, inclusive datos de lugar (direccion y localidad) creando un nucleo familiar predeterminado en un hogar fisico
+     * Se registran datos personales, inclusive datos de lugar (direccion y localidad). El sistema registral se encarga de hacer interoperabilidad con Lugar
      * @param array $param
      * @throws Exception
      */
-    public function setAttributesAndSave($param = array()) {
-        
+    public function setAttributesAndSave($param = array(), $arrayErrors = array()) {
         
         ####### Instanciamos atributos de PersonaForm #########
         $this->setAttributes($param);
         if(!$this->validate()){
             $arrayErrors = ArrayHelper::merge($arrayErrors, $this->getErrors());
         }   
-        
         ####### Instanciamos atributos de LugarForm #########
         $lugarForm = new LugarForm();
         if(isset($param['lugar'])){
@@ -148,7 +146,7 @@ class PersonaForm extends Model
         if(!$lugarForm->validate()){
             $arrayErrors=ArrayHelper::merge($arrayErrors, $lugarForm->getErrors());
         } 
-        
+
         ###### chequeamos si existen errores ###############        
         if(count($arrayErrors)>0){
             throw new Exception(json_encode($arrayErrors));
