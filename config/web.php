@@ -86,6 +86,9 @@ $config = [
         ],
     ],
     'params' => $params,
+    'modules' => [
+        'audit' => 'bedezign\yii2\audit\Audit',
+    ],
 ];
 
 if (YII_ENV_DEV) {
