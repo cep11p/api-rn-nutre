@@ -173,7 +173,7 @@ class PersonaController extends ActiveController{
      * Se busca una persona por numero documento
      * @param type $nro_documento
      * @Method GET
-     * @url ejemplo http://api.pril.local/api/personas/buscar-por-documento/29800100
+     * @url ejemplo http://api.rnnutre.local/personas/buscar-por-documento/29800100
      * @return array
      */
     public function actionBuscarPorDocumento($nro_documento)
@@ -181,12 +181,13 @@ class PersonaController extends ActiveController{
         $resultado['estado']=false;   
         $resultado = \Yii::$app->registral->buscarPersonaPorNroDocumento($nro_documento);
         
-        if(isset($resultado['resultado']) && count($resultado['resultado'])>0){
-            $data['success']=true;
-            $data['resultado']=$resultado['resultado'];
+        if(isset($resultado[0]) && count($resultado[0])>0){
+            $data=$resultado[0];
+            
+            $beneficiario = \app\models\Beneficiario::findOne(['personaid'=>$resultado[0]['id']]);
+            $data['beneficiario'] = (isset($beneficiario['id']))?true:false; 
         }else{
-            $data['success']=false;  
-            $data['message']="No se encontró ninguna persona!";
+            throw new \yii\web\HttpException(404, 'La persona no se encuentra registrada');
         }
 
         return $data;
