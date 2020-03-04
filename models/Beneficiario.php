@@ -27,7 +27,10 @@ class Beneficiario extends BaseBeneficiario
         return ArrayHelper::merge(
             parent::rules(),
             [
-                # custom validation rules
+                ['edad_por_hijo', 'required', 'when' => function($model) {
+                        return ($model->cantidad_hijo != null || $model->cantidad_hijo != 0);
+                    }, 'message' =>'Se requieren registrar las edades de los hijos'
+                ]
             ]
         );
     }
@@ -38,6 +41,9 @@ class Beneficiario extends BaseBeneficiario
      * @param type $safeOnly
      */
     public function setAttributes($values, $safeOnly = true) {
+        
+        parent::setAttributes($values, $safeOnly);
+        
         $persona = new PersonaForm();
         $persona->setAttributesAndSave($values);
         $this->personaid = $persona->id;

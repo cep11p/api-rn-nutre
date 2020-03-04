@@ -61,7 +61,7 @@ class BeneficiarioController extends ActiveController{
      */
     public function actionCreate()
     {        
-        $resultado['message']='Se guarda un Beneficiario';
+        $resultado['message']='Se registra un Beneficiario';
         $param = Yii::$app->request->post();
         $transaction = Yii::$app->db->beginTransaction();
         try {
@@ -71,6 +71,8 @@ class BeneficiarioController extends ActiveController{
             //Registrar y validar personaid
             
             if(!$model->save()){
+                //realizamos un borrado logico de la persona registrado y mostramos el error
+                $resultado = \Yii::$app->registral->borrarPersona($model->personaid);
                 $arrayErrors=$model->getErrors();
                 throw new Exception(json_encode($arrayErrors));
             }

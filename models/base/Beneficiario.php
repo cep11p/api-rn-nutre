@@ -12,6 +12,8 @@ use Yii;
  * @property integer $id
  * @property integer $personaid
  * @property string $estado
+ * @property integer $cantidad_hijo
+ * @property string $edad_por_hijo
  * @property string $aliasModel
  */
 abstract class Beneficiario extends \yii\db\ActiveRecord
@@ -34,8 +36,8 @@ abstract class Beneficiario extends \yii\db\ActiveRecord
     {
         return [
             [['personaid'], 'required'],
-            [['personaid'], 'integer'],
-            [['estado'], 'string', 'max' => 100]
+            [['personaid', 'cantidad_hijo'], 'integer'],
+            [['estado', 'edad_por_hijo'], 'string', 'max' => 100]
         ];
     }
 
@@ -48,6 +50,8 @@ abstract class Beneficiario extends \yii\db\ActiveRecord
             'id' => 'ID',
             'personaid' => 'Personaid',
             'estado' => 'Estado',
+            'cantidad_hijo' => 'Cantidad Hijo',
+            'edad_por_hijo' => 'Edad Por Hijo',
         ];
     }
 

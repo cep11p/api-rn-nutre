@@ -52,6 +52,37 @@ class ServicioRegistral extends Component implements IServicioRegistral
         }
        
     }
+    
+    /**
+     * Se realiza un borrado fisico
+     * @param int $id
+     */
+    public function borrarPersona($id)
+    {
+        $client =   $this->_client;
+        try{
+            \Yii::error(json_encode($id));
+            $headers = [
+                'Authorization' => 'Bearer ' .\Yii::$app->params['JWT_REGISTRAL'], 
+           ];
+            
+            $response = $client->request('DELETE', \Yii::$app->params['URL_REGISTRAL']."/api/personas/$id", ['headers' => $headers]);
+            $respuesta = json_decode($response->getBody()->getContents(), true);
+            \Yii::error($respuesta);
+            
+            return $respuesta;
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+                $resultado = json_decode($e->getResponse()->getBody()->getContents());
+                \Yii::$app->getModule('audit')->data('catchedexc', \yii\helpers\VarDumper::dumpAsString($e->getResponse()->getBody()));
+                \Yii::error('Error de integración:'.$e->getResponse()->getBody(), $category='apioj');
+                return $resultado;
+        } catch (Exception $e) {
+                \Yii::$app->getModule('audit')->data('catchedexc', \yii\helpers\VarDumper::dumpAsString($e));
+                \Yii::error('Error inesperado: se produjo:'.$e->getMessage(), $category='apioj');
+                return false;
+        }
+       
+    }
     /************************ OFICIO ***********************/
     public function crearOficio($data)
     {
