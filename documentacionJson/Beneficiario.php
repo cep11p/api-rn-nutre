@@ -1,7 +1,7 @@
 <?php
 
 /**** registrar un beneficiario ***
-@url ejemplo http://api-rnnutre.local/beneficiarios
+@url ejemplo http://api.rnnutre.local/beneficiarios
 @Method POST
 {    
     "nombre": "Carlos",
