@@ -27,4 +27,12 @@
         "localidadid":1
     }    
 }
+@return 
+{
+    "message": "Se registra un Beneficiario",
+    "success": true,
+    "data": {
+        "id": 19
+    }
+}
 **/
