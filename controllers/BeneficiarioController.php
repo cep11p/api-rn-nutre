@@ -50,8 +50,23 @@ class BeneficiarioController extends ActiveController{
     {
         $actions = parent::actions();
         unset($actions['create']);
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
         return $actions;
     
+    }
+    
+    public function prepareDataProvider() 
+    {
+        try {
+            $searchModel = new \app\models\BeneficiarioSearch();
+            $resultado = $searchModel->search(\Yii::$app->request->queryParams);
+            
+            return $resultado;
+
+        }catch (Exception $exc) {
+            $mensaje =$exc->getMessage();
+            throw new \yii\web\HttpException(400, $mensaje);
+        }
     }
     
     /**
@@ -67,7 +82,7 @@ class BeneficiarioController extends ActiveController{
         try {
             
             $model = new Beneficiario();
-            $model->setAttributes($param);
+            $model->setAttributesAndValidatePersona($param);
             //Registrar y validar personaid
             
             if(!$model->save()){

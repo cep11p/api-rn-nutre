@@ -291,6 +291,10 @@ class PersonaForm extends Model
     public function buscarPersonaPorIdEnRegistral($id){
         $response = \Yii::$app->registral->buscarPersonaPorId($id); 
         
+        if(isset($response->message)){
+            throw new Exception($response->message);
+        }
+        
         if(isset($response['estado']) && $response['estado']==true){
             $this->setAttributes(array_shift($response['resultado']));
             
@@ -300,6 +304,10 @@ class PersonaForm extends Model
     public function buscarPersonaEnRegistral($param){
         $resultado = array();
         $response = \Yii::$app->registral->buscarPersona($param); 
+        
+        if(isset($response->message)){
+            throw new Exception($response->message);
+        }
         
         if(isset($response['estado']) && $response['estado']==true){
             
@@ -387,14 +395,22 @@ class PersonaForm extends Model
      * Una validacion Rule()
      */
     public function existeEnRegistral(){
-        $response = \Yii::$app->registral->buscarPersonaPorId($this->id);       
+        $response = \Yii::$app->registral->buscarPersonaPorId($this->id);
+        
+        if(isset($response->message)){
+            throw new Exception($response->message);
+        }
         
         if(isset($response['estado']) && $response['estado']!=true){
             $this->addError('id', 'La persona con el id '.$this->id.' no existe!');
         }
     }
     public function existeNucleoEnRegistral(){
-        $response = \Yii::$app->registral->buscarNucleo(array("id"=>$this->nucleoid));       
+        $response = \Yii::$app->registral->buscarNucleo(array("id"=>$this->nucleoid)); 
+        
+        if(isset($response->message)){
+            throw new Exception($response->message);
+        }
         
         if(isset($response['estado']) && $response['estado']!=true){
             $this->addError('nucleoid', 'El nucleo con el id '.$this->nucleoid.' no existe!');
@@ -407,7 +423,12 @@ class PersonaForm extends Model
     public function existeNroDocumentoEnRegistral(){
         
         if(!isset($this->id)){
-            $response = \Yii::$app->registral->buscarPersonaPorNroDocumento($this->nro_documento);      
+            $response = \Yii::$app->registral->buscarPersonaPorNroDocumento($this->nro_documento);
+            
+            if(isset($response->message)){
+                throw new Exception($response->message);
+            }
+        
             if(isset($response['estado']) && $response['estado']==true){
                 $this->addError('nro_documento', 'El nro de documento '.$this->nro_documento.' ya está en uso!');
             }

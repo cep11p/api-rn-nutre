@@ -44,6 +44,8 @@ class ServicioRegistral extends Component implements IServicioRegistral
                 $resultado = json_decode($e->getResponse()->getBody()->getContents());
                 \Yii::$app->getModule('audit')->data('catchedexc', \yii\helpers\VarDumper::dumpAsString($e->getResponse()->getBody()));
                 \Yii::error('Error de integración:'.$e->getResponse()->getBody(), $category='apioj');
+                
+                print_r($resultado);die();
                 return $resultado;
         } catch (Exception $e) {
                 \Yii::$app->getModule('audit')->data('catchedexc', \yii\helpers\VarDumper::dumpAsString($e));
@@ -528,8 +530,8 @@ class ServicioRegistral extends Component implements IServicioRegistral
                 'Authorization' => 'Bearer ' .\Yii::$app->params['JWT_REGISTRAL'],
                 'Content-Type'=>'application/json'
             ];          
-            
-            $response = $client->request('GET', \Yii::$app->params['URL_REGISTRAL'].'/api/persona?'.$criterio, ['headers' => $headers]);
+
+            $response = $client->request('GET', \Yii::$app->params['URL_REGISTRAL'].'/api/personas?'.$criterio, ['headers' => $headers]);
             $respuesta = json_decode($response->getBody()->getContents(), true);
             \Yii::info($respuesta);
             

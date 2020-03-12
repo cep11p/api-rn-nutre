@@ -40,8 +40,7 @@ class Beneficiario extends BaseBeneficiario
      * @param array $values
      * @param type $safeOnly
      */
-    public function setAttributes($values, $safeOnly = true) {
-        
+    public function setAttributesAndValidatePersona($values, $safeOnly = true) {
         parent::setAttributes($values, $safeOnly);
         
         $persona = new PersonaForm();

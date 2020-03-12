@@ -41,24 +41,31 @@ class PersonaController extends ActiveController{
         $resultado['estado']=false;
         $param = Yii::$app->request->queryParams;
         
-        
-        $resultado = \Yii::$app->registral->buscarPersona($param);
-        
-        if($resultado['estado']!=true){
-            $data['success']=false;
-            $data['total_filtrado']=0;            
-            $data['resultado']=[];
-            $data['message']="No se encontró ninguna persona!";   
-        }else{
-            $data['success']=true;            
-            $data['total_filtrado']=$resultado['total_filtrado'];
-            $data['pages']=$resultado['pages'];
-            $data['pagesize']=$resultado['pagesize'];
-            $data['resultado']=$resultado['resultado'];
+        try {
+            $resultado = \Yii::$app->registral->buscarPersona($param);
+            
+            if(isset($resultado->message)){
+                throw new Exception($resultado->message);
+            }
+            
+            if(isset($resultado['estado']) && $resultado['estado']!=true){
+                $data['success']=false;
+                $data['total_filtrado']=0;            
+                $data['resultado']=[];
+                $data['message']="No se encontró ninguna persona!";   
+            }else{
+                $data['success']=true;            
+                $data['total_filtrado']=$resultado['total_filtrado'];
+                $data['pages']=$resultado['pages'];
+                $data['pagesize']=$resultado['pagesize'];
+                $data['resultado']=$resultado['resultado'];
+            }
+        }catch (Exception $exc) {
+            $mensaje =$exc->getMessage();
+            throw new \yii\web\HttpException(400, $mensaje);
         }
         
-        return $data;
-
+        return $resultado;
     }
     
     public function actionView($id)
