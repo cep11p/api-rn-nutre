@@ -50,6 +50,7 @@ class BeneficiarioController extends ActiveController{
     {
         $actions = parent::actions();
         unset($actions['create']);
+        unset($actions['update']);
         $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
         return $actions;
     
@@ -104,6 +105,50 @@ class BeneficiarioController extends ActiveController{
             $transaction->rollBack();
             $mensaje =$exc->getMessage();
             throw new \yii\web\HttpException(400, $mensaje);
+        }
+
+    }
+    
+    /**
+     * Se modificar un Beneficiario y se vincula con una Persona()
+     * @return array Un array con datos
+     * @throws \yii\web\HttpException
+     */
+    public function actionUpdate($id)
+    {
+        $resultado['message']='Se modifica un Beneficiario';
+        $param = Yii::$app->request->post();
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            
+            $model = Beneficiario::findOne(['id'=>$id]);            
+            if($model==NULL){
+                $msj = 'El beneficiario con el id '.$id.' no existe!';
+                throw new Exception($msj);
+            }
+            
+            $model->setAttributesAndValidatePersona($param);
+            //Registrar y validar personaid
+            
+            if(!$model->save()){
+                //realizamos un borrado logico de la persona registrado y mostramos el error
+                $resultado = \Yii::$app->registral->borrarPersona($model->personaid);
+                $arrayErrors=$model->getErrors();
+                throw new Exception(json_encode($arrayErrors));
+            }
+            
+            $transaction->commit();
+            
+            $resultado['success']=true;
+            $resultado['data']['id']=$model->id;
+            
+            return  $resultado;
+           
+        }catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            $transaction->rollBack();
+            $mensaje =$exc->getMessage();
+            throw new \yii\web\HttpException(500, $mensaje);
         }
 
     }
