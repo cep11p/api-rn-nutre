@@ -17,6 +17,8 @@
     "generoid": 1,
     "email":"carlos@correo.com.ar",
     "cuil":"20367655678",
+    "cantidad_hijo": 1,
+    "edad_por_hijo": "22",
     "lugar": {
         "barrio":"Ina lauquen",
         "calle":"Mata negra",
