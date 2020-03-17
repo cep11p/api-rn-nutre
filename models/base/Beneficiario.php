@@ -37,7 +37,8 @@ abstract class Beneficiario extends \yii\db\ActiveRecord
         return [
             [['personaid'], 'required'],
             [['personaid', 'cantidad_hijo'], 'integer'],
-            [['estado', 'edad_por_hijo'], 'string', 'max' => 100]
+            [['estado', 'edad_por_hijo'], 'string', 'max' => 100],
+            [['personaid'], 'unique']
         ];
     }
 
