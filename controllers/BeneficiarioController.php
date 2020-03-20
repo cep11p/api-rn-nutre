@@ -33,7 +33,9 @@ class BeneficiarioController extends ActiveController{
         ];
 
         // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
-        $behaviors['authenticator']['except'] = ['options'];     
+        $behaviors['authenticator']['except'] = [
+            'create'
+        ];      
 
         $behaviors['access'] = [
             'class' => \yii\filters\AccessControl::className(),
@@ -42,6 +44,11 @@ class BeneficiarioController extends ActiveController{
                 [
                     'allow' => true,
                     'roles' => ['@'],
+                ],
+                [
+                    'allow' => true,
+                    'actions' => ['create'],
+                    'roles' => ['?'],
                 ]
             ]
         ];
