@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d56a0b135eb3d96f187a41df7c9a9558",
+    "content-hash": "6eada037cd043185262305fd87f7722d",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -154,12 +154,12 @@
             "version": "v2.9.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/chartjs/Chart.js.git",
+                "url": "git@github.com:nnnick/Chart.js.git",
                 "reference": "06f73dc3590084b2c464bf08189c7aee2b6b92d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/06f73dc3590084b2c464bf08189c7aee2b6b92d2",
+                "url": "https://api.github.com/repos/nnnick/Chart.js/zipball/06f73dc3590084b2c464bf08189c7aee2b6b92d2",
                 "reference": "06f73dc3590084b2c464bf08189c7aee2b6b92d2"
             },
             "type": "bower-asset",
@@ -172,7 +172,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -211,7 +211,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -876,6 +876,49 @@
             "time": "2019-10-28T03:44:26+00:00"
         },
         {
+            "name": "firebase/php-jwt",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
+                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2016-07-18T04:51:16+00:00"
+        },
+        {
             "name": "friendsofphp/php-cs-fixer",
             "version": "v2.16.1",
             "source": {
@@ -1191,6 +1234,54 @@
                 "shell"
             ],
             "time": "2019-12-20T08:48:10+00:00"
+        },
+        {
+            "name": "msheng/yii2-jwt",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Yemsheng/yii2-jwt.git",
+                "reference": "7985fdb83147f75dae4451237ac25d3e9102b827"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Yemsheng/yii2-jwt/zipball/7985fdb83147f75dae4451237ac25d3e9102b827",
+                "reference": "7985fdb83147f75dae4451237ac25d3e9102b827",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "~4.0.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "msheng\\JWT\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damir Shamanaev",
+                    "email": "damirka.ru@gmail.com",
+                    "homepage": "https://github.com/damirka"
+                },
+                {
+                    "name": "msheng",
+                    "email": "msheng.ye@foxmail.com",
+                    "homepage": "https://github.com/Yemsheng"
+                }
+            ],
+            "description": "Trait for easier JWT integration",
+            "homepage": "https://github.com/Yemsheng/yii2-jwt",
+            "keywords": [
+                "jwt",
+                "yii"
+            ],
+            "time": "2016-08-09T03:17:59+00:00"
         },
         {
             "name": "opis/closure",

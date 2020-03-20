@@ -10,4 +10,7 @@ return [
     /***interoperabilidad con Lugar*****/
     'servicioLugar'=> getenv('SERVICIO_LUGAR')?getenv('SERVICIO_LUGAR'):'app\components\DummyServicioLugar',
     'JWT_LUGAR' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoiYWRtaW4iLCJ1aWQiOjF9.rTItKCAU2xYxW1kiCDwP-e64LK2DG6PAq7FGCs43V5s',
+    /**JWT**/
+    'JWT_SECRET' => '123456',
+    'JWT_EXPIRE' => 10*24*60*60
 ];

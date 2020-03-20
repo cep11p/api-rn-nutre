@@ -37,8 +37,10 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'app\models\ApiUser',
+            'enableSession' => false,
+            'enableSession' => false,
+//            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -73,6 +75,14 @@ $config = [
             'rules' => [
                 [   'class' => 'yii\rest\UrlRule',
                     'controller' => 'beneficiario'
+                ],
+                [   'class' => 'yii\rest\UrlRule',
+                    'controller' => 'usuario',   
+                    'extraPatterns' => [
+                        'POST login' => 'login',
+                        'OPTIONS login' => 'options'
+                    ],                       
+                     
                 ],
                 /***** Registral ********/
                 [   'class' => 'yii\rest\UrlRule',
