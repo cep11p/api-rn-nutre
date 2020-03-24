@@ -1,0 +1,14 @@
+class_name: ApiTester
+modules:
+    enabled:
+        - \Helper\Api
+        - Yii2:
+            part: [ORM,fixtures]
+        - REST:
+            url: http://rn_nutre/index-test.php
+            depends: 
+               - PhpBrowser
+               - Yii2
+            part: Json
+    config:
+        - Yii2

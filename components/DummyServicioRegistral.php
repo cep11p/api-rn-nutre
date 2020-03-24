@@ -28,11 +28,6 @@ class DummyServicioRegistral extends Component implements IServicioRegistral
     }
    
     /**
-     *
-     * @param string $legajo
-     * @param string $organismo
-     * @param string $fiscalAnterior
-     * @param string $fiscalActual
      * @return string $id Es el id de la persona
      */
     public function crearPersona($data)
