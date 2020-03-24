@@ -25,7 +25,7 @@ class LugarForm extends Model
     public function rules()
     {
         return [
-            [['calle', 'altura', 'localidadid'], 'required'],
+            [['calle', 'altura', 'localidadid','barrio'], 'required'],
             [['localidadid','id'], 'integer'],
             [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto', 'escalera'], 'string', 'max' => 200],
         ];
