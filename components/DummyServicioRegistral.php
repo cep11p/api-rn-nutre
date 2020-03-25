@@ -26,6 +26,15 @@ class DummyServicioRegistral extends Component implements IServicioRegistral
         parent::__construct($config);
         $this->_client = $guzzleClient;
     }
+    
+    /**
+     * Se realiza un borrado fisico
+     * @param int $id
+     */
+    public function borrarPersona($id)
+    {
+        return '';       
+    }
    
     /**
      * @return string $id Es el id de la persona
