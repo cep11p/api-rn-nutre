@@ -35,6 +35,10 @@ $config = [
                 # Other migration namespaces
                 'bedezign\yii2\audit\migrations',
             ],
+        ],
+        'fixture' => [ // Fixture generation command line.
+            'class' => 'yii\console\controllers\FixtureController',
+            'namespace' => 'app\tests\fixtures',
         ]
     ],
 ];
